@@ -55,6 +55,7 @@ Also, you can over-ride the required attributes fields in your Thing model by ad
 def required_opt_in_able_attributes
   [:allow_email] #choose from the above list to include only what you want
 end
+```
 
 So you can have all the columns in your database, but make a selection of them mandatory (the others will be optional)
 
