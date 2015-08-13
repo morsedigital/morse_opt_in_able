@@ -7,13 +7,10 @@ RSpec.describe OptInAble, type: :module do
     def initialize(*args)
       super
     end
-    def self.column_names
-      []
-    end
-    def errors_add(sym,text)
-      @errors[sym]=text
-    end
+    def self.column_names; [] end
+    def errors_add(sym,text); @errors[sym]=text; end
   end
+
   class ThingWithNoFields < Thing 
     include OptInAble
   end
