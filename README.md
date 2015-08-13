@@ -1,8 +1,8 @@
 # MorseOptInAble
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/morse_opt_in_able`. To experiment with that code, run `bin/console` for an interactive prompt.
+Adds marketing opt-in fields to ActiveRecord models
 
-TODO: Delete this and the text above, and describe your gem
+[![Coverage Status](https://coveralls.io/repos/morsedigital/morse_opt_in_able/badge.svg?branch=master&service=github)](https://coveralls.io/github/morsedigital/morse_opt_in_able?branch=master)
 
 ## Installation
 
@@ -22,11 +22,43 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+In your model:
+
+```ruby
+include OptInAble
+```
+
+It then provides you with the following BOOLEAN attributes
+
+```ruby
+   :allow_email
+   :allow_mail
+   :allow_sms
+   :allow_phone
+   :optin_marketing
+   :optin_third_party
+```
+
+By default if you do Thing.new and you don't have the relevant fields in your database, it'll return a validtion error.
+
+You can over-ride the required database fields in your Thing model by adding this ABOVE where you include OptInAble
+
+```ruby
+def required_database_fields
+  [:allow_email] #choose from the above list to include only what you want
+end
+```
+
+Also, you can over-ride the required attributes fields in your Thing model by adding this ABOVE where you include OptInAble
+
+```ruby
+def required_opt_in_able_attributes
+  [:allow_email] #choose from the above list to include only what you want
+end
+
+So you can have all the columns in your database, but make a selection of them mandatory (the others will be optional)
 
 ## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment. 
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
